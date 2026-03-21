@@ -1,0 +1,30 @@
+# Backend
+backend/pharmacy.db
+backend/pharmacy.db-shm
+backend/pharmacy.db-wal
+backend/*.exe
+backend/pharmacy-erp
+
+# Frontend
+frontend/node_modules/
+frontend/dist/
+frontend/.vite/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+logs/
+
+# Environment
+.env
+.env.local
