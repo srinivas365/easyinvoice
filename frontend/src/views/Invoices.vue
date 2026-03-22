@@ -74,7 +74,7 @@
         <ul class="divide-y divide-gray-200">
         <li v-for="invoice in group.invoices" :key="invoice.id" :class="showArchive ? 'bg-gray-50' : ''">
           <div class="px-4 py-4 sm:px-6">
-            <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
+            <div class="flex min-w-0 flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
               <!-- Left Section: Invoice Info -->
               <div class="flex-1 min-w-0">
                 <div class="flex items-center flex-wrap gap-2 mb-2">
@@ -100,14 +100,18 @@
               </div>
               
               <!-- Right Section: Total and Actions -->
-              <div class="flex items-center justify-between lg:justify-end gap-4 lg:gap-6">
+              <div
+                class="flex w-full min-w-0 flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center sm:justify-between lg:ml-auto lg:w-auto lg:max-w-full lg:justify-end lg:gap-x-6 lg:gap-y-2"
+              >
                 <!-- Total Amount -->
-                <div class="flex-shrink-0">
-                  <p class="text-lg font-bold text-gray-900 whitespace-nowrap">Total: ₹{{ invoice.total_amount?.toFixed(2) || '0.00' }}</p>
+                <div class="shrink-0">
+                  <p class="text-base sm:text-lg font-bold text-gray-900 tabular-nums">
+                    Total: ₹{{ invoice.total_amount?.toFixed(2) || '0.00' }}
+                  </p>
                 </div>
-                
+
                 <!-- Action Buttons -->
-                <div class="flex-shrink-0 flex flex-wrap items-center gap-2">
+                <div class="flex min-w-0 w-full flex-wrap items-center gap-2 sm:w-auto sm:justify-end lg:justify-end">
                 <button
                   @click="viewInvoice(invoice)"
                   class="px-3 py-1.5 bg-blue-50 hover:bg-blue-100 text-blue-700 rounded-md text-sm font-medium transition-colors shadow-sm hover:shadow"
