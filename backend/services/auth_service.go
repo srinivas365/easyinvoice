@@ -42,10 +42,11 @@ func (s *AuthService) Login(username, password string) (string, *models.User, er
 
 func (s *AuthService) generateToken(user *models.User) (string, error) {
 	claims := jwt.MapClaims{
-		"user_id":  user.ID,
-		"username": user.Username,
-		"role":     user.Role,
-		"exp":      time.Now().Add(time.Hour * 24).Unix(),
+		"user_id":    user.ID,
+		"account_id": user.AccountID,
+		"username":   user.Username,
+		"role":       user.Role,
+		"exp":        time.Now().Add(time.Hour * 24).Unix(),
 	}
 
 	token := jwt.NewWithClaims(jwt.SigningMethodHS256, claims)

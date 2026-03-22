@@ -15,10 +15,10 @@ func NewSettingsService() *SettingsService {
 	}
 }
 
-func (s *SettingsService) GetSettings() (*models.Settings, error) {
-	return s.settingsRepo.Get()
+func (s *SettingsService) GetSettings(accountID uint) (*models.Settings, error) {
+	return s.settingsRepo.GetForAccount(accountID)
 }
 
-func (s *SettingsService) UpdateSettings(settings *models.Settings) error {
-	return s.settingsRepo.Update(settings)
+func (s *SettingsService) UpdateSettings(accountID uint, settings *models.Settings) error {
+	return s.settingsRepo.UpdateForAccount(accountID, settings)
 }

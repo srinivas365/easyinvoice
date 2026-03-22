@@ -43,12 +43,14 @@ func (c *AuthController) Login(ctx *gin.Context) {
 
 func (c *AuthController) GetProfile(ctx *gin.Context) {
 	userID, _ := ctx.Get("user_id")
+	accountID, _ := ctx.Get("account_id")
 	username, _ := ctx.Get("username")
 	role, _ := ctx.Get("role")
 
 	ctx.JSON(http.StatusOK, gin.H{
-		"id":       userID,
-		"username": username,
-		"role":     role,
+		"id":          userID,
+		"account_id":  accountID,
+		"username":    username,
+		"role":        role,
 	})
 }

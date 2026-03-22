@@ -46,6 +46,11 @@ func AuthMiddleware() gin.HandlerFunc {
 		c.Set("user_id", uint(claims["user_id"].(float64)))
 		c.Set("username", claims["username"].(string))
 		c.Set("role", claims["role"].(string))
+		if aid, ok := claims["account_id"]; ok {
+			c.Set("account_id", uint(aid.(float64)))
+		} else {
+			c.Set("account_id", uint(1))
+		}
 		c.Next()
 	}
 }

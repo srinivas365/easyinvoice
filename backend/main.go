@@ -34,6 +34,7 @@ func main() {
 func migrate() {
 	// First run AutoMigrate for models that don't need special handling
 	err := config.DB.AutoMigrate(
+		&models.Account{},
 		&models.User{},
 		&models.Medicine{},
 		&models.Sale{},

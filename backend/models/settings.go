@@ -8,6 +8,8 @@ import (
 
 type Settings struct {
 	ID           uint           `json:"id" gorm:"primaryKey"`
+	AccountID    uint           `json:"account_id" gorm:"uniqueIndex;not null"`
+	Account      Account        `json:"-" gorm:"constraint:OnUpdate:CASCADE,OnDelete:CASCADE"`
 	CompanyName  string         `json:"company_name" gorm:"not null"`
 	Address      string         `json:"address"`
 	PhoneNumber  string         `json:"phone_number"`

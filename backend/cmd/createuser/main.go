@@ -24,6 +24,8 @@ func main() {
 	password := flag.String("password", "", "plain password; omit with -password-stdin")
 	passwordStdin := flag.Bool("password-stdin", false, "read password from stdin (first line only)")
 	role := flag.String("role", "staff", "user role: admin or staff")
+	newAccount := flag.Bool("new-account", false, "create a new account and assign this user to it")
+	accountIDFlag := flag.Uint("account-id", 0, "join an existing account id (default: first account in DB)")
 	flag.Parse()
 
 	if *username == "" {
@@ -48,9 +50,18 @@ func main() {
 		log.Fatal("role must be admin or staff")
 	}
 
+	if *newAccount && *accountIDFlag > 0 {
+		log.Fatal("use only one of -new-account or -account-id")
+	}
+
 	config.InitDB()
-	if err := config.DB.AutoMigrate(&models.User{}); err != nil {
-		log.Fatal("migrate users:", err)
+	if err := config.DB.AutoMigrate(&models.Account{}, &models.User{}, &models.Settings{}); err != nil {
+		log.Fatal("migrate:", err)
+	}
+
+	accountID, err := resolveAccountID(*newAccount, uint(*accountIDFlag))
+	if err != nil {
+		log.Fatal(err)
 	}
 
 	userRepo := repository.NewUserRepository()
@@ -67,15 +78,45 @@ func main() {
 	}
 
 	u := &models.User{
-		Username: strings.TrimSpace(*username),
-		Password: hash,
-		Role:     r,
+		AccountID: accountID,
+		Username:  strings.TrimSpace(*username),
+		Password:  hash,
+		Role:      r,
 	}
 	if err := userRepo.Create(u); err != nil {
 		log.Fatal("create user:", err)
 	}
 
-	fmt.Printf("Created user %q with role %q (id=%d)\n", u.Username, u.Role, u.ID)
+	fmt.Printf("Created user %q with role %q account_id=%d (user id=%d)\n", u.Username, u.Role, u.AccountID, u.ID)
+}
+
+func resolveAccountID(newAccount bool, accountID uint) (uint, error) {
+	if newAccount {
+		a := models.Account{}
+		if err := config.DB.Create(&a).Error; err != nil {
+			return 0, err
+		}
+		return a.ID, nil
+	}
+	if accountID > 0 {
+		var a models.Account
+		if err := config.DB.First(&a, accountID).Error; err != nil {
+			return 0, fmt.Errorf("account id %d not found", accountID)
+		}
+		return a.ID, nil
+	}
+	var a models.Account
+	if err := config.DB.Order("id").First(&a).Error; err != nil {
+		if errors.Is(err, gorm.ErrRecordNotFound) {
+			na := models.Account{}
+			if err := config.DB.Create(&na).Error; err != nil {
+				return 0, err
+			}
+			return na.ID, nil
+		}
+		return 0, err
+	}
+	return a.ID, nil
 }
 
 func readPasswordFromStdin() (string, error) {

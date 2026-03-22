@@ -147,10 +147,22 @@ The backend server will start on `http://localhost:8080`
 
 The database file `pharmacy.db` will be created automatically in the backend directory.
 
-**Users:** No default accounts are created. Add the first user from the backend directory:
+**Users:** No default accounts are created. Add the first user from the backend directory (this also creates the first **account**; company **settings** are stored per account):
 
 ```bash
 go run ./cmd/createuser -username <name> -password '<password>' -role admin
+```
+
+Add another user to the same account (same company settings; use the account id shown at login or after creating the first user):
+
+```bash
+go run ./cmd/createuser -username <name> -password '<password>' -account-id 1
+```
+
+Create a new account (separate company settings record):
+
+```bash
+go run ./cmd/createuser -username <name> -password '<password>' -role admin -new-account
 ```
 
 ### Frontend Setup

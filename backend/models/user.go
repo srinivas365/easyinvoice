@@ -8,6 +8,8 @@ import (
 
 type User struct {
 	ID        uint           `json:"id" gorm:"primaryKey"`
+	AccountID uint           `json:"account_id" gorm:"not null;index"`
+	Account   Account        `json:"-" gorm:"constraint:OnUpdate:CASCADE,OnDelete:RESTRICT"`
 	Username  string         `json:"username" gorm:"unique;not null"`
 	Password  string         `json:"-" gorm:"not null"`
 	Role      string         `json:"role" gorm:"not null;default:'staff'"`
