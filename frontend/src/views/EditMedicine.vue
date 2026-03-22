@@ -1,14 +1,14 @@
 <template>
-  <div class="px-4 py-6 sm:px-0">
-    <div class="mb-6">
-      <h1 class="text-3xl font-bold text-gray-900">Edit Medicine</h1>
+  <div class="px-0 py-4 sm:py-6">
+    <div class="mb-4 sm:mb-6">
+      <h1 class="text-2xl sm:text-3xl font-bold text-gray-900">Edit Medicine</h1>
     </div>
 
     <div v-if="loading" class="text-center py-12">
       <div class="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600"></div>
     </div>
 
-    <div v-else class="bg-white shadow rounded-lg p-6 max-w-2xl">
+    <div v-else class="bg-white shadow rounded-lg p-4 sm:p-6 w-full max-w-2xl">
       <form @submit.prevent="handleSubmit">
         <div class="grid grid-cols-1 gap-6 sm:grid-cols-2">
           <div>

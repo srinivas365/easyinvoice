@@ -1,7 +1,7 @@
 <template>
-  <div class="px-4 py-6 sm:px-0">
-    <div class="mb-6">
-      <h1 class="text-3xl font-bold text-gray-900">Settings</h1>
+  <div class="px-0 py-4 sm:py-6">
+    <div class="mb-4 sm:mb-6">
+      <h1 class="text-2xl sm:text-3xl font-bold text-gray-900">Settings</h1>
       <p class="mt-2 text-sm text-gray-600">Configure company details for invoices</p>
     </div>
 
@@ -9,11 +9,11 @@
       <div class="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600"></div>
     </div>
 
-    <div v-else class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+    <div v-else class="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6">
       <!-- Settings Section -->
-      <div class="bg-white shadow rounded-lg p-6">
+      <div class="bg-white shadow rounded-lg p-4 sm:p-6">
         <div class="mb-6">
-          <h2 class="text-2xl font-bold text-gray-900">Company Settings</h2>
+          <h2 class="text-xl sm:text-2xl font-bold text-gray-900">Company Settings</h2>
           <p class="mt-1 text-sm text-gray-600">Configure company details for invoices</p>
         </div>
         <form @submit.prevent="handleSubmit">
@@ -89,18 +89,18 @@
             </div>
           </div>
 
-          <div class="mt-6 flex justify-end space-x-3">
+          <div class="mt-6 flex flex-col-reverse gap-2 sm:flex-row sm:justify-end sm:gap-0 sm:space-x-3">
             <button
               type="button"
               @click="loadSettings"
-              class="bg-gray-300 hover:bg-gray-400 text-gray-800 px-4 py-2 rounded-md text-sm font-medium"
+              class="w-full sm:w-auto bg-gray-300 hover:bg-gray-400 text-gray-800 px-4 py-2.5 rounded-md text-sm font-medium touch-manipulation min-h-[44px] sm:min-h-0"
             >
               Reset
             </button>
             <button
               type="submit"
               :disabled="saving"
-              class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md text-sm font-medium disabled:opacity-50"
+              class="w-full sm:w-auto bg-blue-600 hover:bg-blue-700 text-white px-4 py-2.5 rounded-md text-sm font-medium disabled:opacity-50 touch-manipulation min-h-[44px] sm:min-h-0"
             >
               {{ saving ? 'Saving...' : 'Save Settings' }}
             </button>
@@ -109,15 +109,16 @@
       </div>
 
       <!-- Distributors Section -->
-      <div class="bg-white shadow rounded-lg p-6">
-      <div class="mb-6 flex justify-between items-center">
+      <div class="bg-white shadow rounded-lg p-4 sm:p-6">
+      <div class="mb-6 flex flex-col gap-3 sm:flex-row sm:justify-between sm:items-start">
         <div>
-          <h2 class="text-2xl font-bold text-gray-900">Distributors</h2>
+          <h2 class="text-xl sm:text-2xl font-bold text-gray-900">Distributors</h2>
           <p class="mt-1 text-sm text-gray-600">Manage your distributor contacts</p>
         </div>
         <button
+          type="button"
           @click="openAddModal"
-          class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md text-sm font-medium flex items-center gap-2"
+          class="w-full sm:w-auto shrink-0 bg-blue-600 hover:bg-blue-700 text-white px-4 py-2.5 rounded-md text-sm font-medium flex items-center justify-center gap-2 touch-manipulation min-h-[44px] sm:min-h-0"
         >
           <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
@@ -137,11 +138,11 @@
       <div v-else class="overflow-hidden sm:rounded-md">
         <ul class="divide-y divide-gray-200">
           <li v-for="distributor in distributors" :key="distributor.id">
-            <div class="px-4 py-4 sm:px-6">
-              <div class="flex items-center justify-between">
-                <div class="flex-1">
+            <div class="px-3 py-4 sm:px-6">
+              <div class="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+                <div class="flex-1 min-w-0">
                   <div class="flex items-center">
-                    <p class="text-lg font-medium text-gray-900">{{ distributor.name }}</p>
+                    <p class="text-base sm:text-lg font-medium text-gray-900 break-words">{{ distributor.name }}</p>
                   </div>
                   <div class="mt-2 sm:flex sm:justify-between">
                     <div class="sm:flex flex-wrap gap-4">
@@ -160,10 +161,11 @@
                     <p class="text-sm text-gray-500">Address: {{ distributor.address }}</p>
                   </div>
                 </div>
-                <div class="ml-4 flex-shrink-0 flex gap-2">
+                <div class="flex shrink-0 flex-wrap gap-2 sm:ml-4">
                   <button
+                    type="button"
                     @click="openEditModal(distributor)"
-                    class="bg-blue-600 hover:bg-blue-700 text-white px-3 py-1.5 rounded-md text-sm font-medium flex items-center gap-1"
+                    class="flex-1 sm:flex-none bg-blue-600 hover:bg-blue-700 text-white px-3 py-2 rounded-md text-sm font-medium flex items-center justify-center gap-1 touch-manipulation min-h-[40px]"
                   >
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
@@ -171,8 +173,9 @@
                     Edit
                   </button>
                   <button
+                    type="button"
                     @click="deleteDistributor(distributor.id)"
-                    class="bg-red-600 hover:bg-red-700 text-white px-3 py-1.5 rounded-md text-sm font-medium flex items-center gap-1"
+                    class="flex-1 sm:flex-none bg-red-600 hover:bg-red-700 text-white px-3 py-2 rounded-md text-sm font-medium flex items-center justify-center gap-1 touch-manipulation min-h-[40px]"
                   >
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
@@ -189,8 +192,8 @@
     </div>
 
     <!-- Add/Edit Distributor Modal -->
-    <div v-if="showDistributorModal" class="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full z-50" @click.self="closeDistributorModal">
-      <div class="relative top-20 mx-auto p-5 border w-96 shadow-lg rounded-md bg-white">
+    <div v-if="showDistributorModal" class="fixed inset-0 z-50 flex items-end justify-center sm:items-start sm:pt-20 bg-gray-600/50 overflow-y-auto p-3 sm:p-4" @click.self="closeDistributorModal">
+      <div class="relative w-full max-w-md rounded-lg border bg-white p-4 sm:p-5 shadow-lg mb-[max(0.5rem,env(safe-area-inset-bottom))] sm:mb-0 max-h-[90dvh] overflow-y-auto" @click.stop>
         <div class="mt-3">
           <div class="flex justify-between items-center mb-4">
             <h3 class="text-lg font-medium text-gray-900">
@@ -272,18 +275,18 @@
               </div>
             </div>
 
-            <div class="mt-6 flex justify-end space-x-3">
+            <div class="mt-6 flex flex-col-reverse gap-2 sm:flex-row sm:justify-end sm:gap-0 sm:space-x-3">
               <button
                 type="button"
                 @click="closeDistributorModal"
-                class="bg-gray-300 hover:bg-gray-400 text-gray-800 px-4 py-2 rounded-md text-sm font-medium"
+                class="w-full sm:w-auto bg-gray-300 hover:bg-gray-400 text-gray-800 px-4 py-2.5 rounded-md text-sm font-medium min-h-[44px] sm:min-h-0 touch-manipulation"
               >
                 Cancel
               </button>
               <button
                 type="submit"
                 :disabled="distributorSaving"
-                class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md text-sm font-medium disabled:opacity-50"
+                class="w-full sm:w-auto bg-blue-600 hover:bg-blue-700 text-white px-4 py-2.5 rounded-md text-sm font-medium disabled:opacity-50 min-h-[44px] sm:min-h-0 touch-manipulation"
               >
                 {{ distributorSaving ? 'Saving...' : (editingDistributor ? 'Update' : 'Add') }}
               </button>

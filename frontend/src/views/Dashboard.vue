@@ -1,7 +1,7 @@
 <template>
-  <div class="px-4 py-6 sm:px-0">
-    <div class="mb-6">
-      <h1 class="text-3xl font-bold text-gray-900">Dashboard</h1>
+  <div class="px-0 py-4 sm:px-0 sm:py-6">
+    <div class="mb-4 sm:mb-6">
+      <h1 class="text-2xl sm:text-3xl font-bold text-gray-900">Dashboard</h1>
     </div>
 
     <div v-if="loading" class="text-center py-12">

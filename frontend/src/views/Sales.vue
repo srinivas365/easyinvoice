@@ -1,14 +1,14 @@
 <template>
-  <div class="px-4 py-6 sm:px-0">
-    <div class="mb-6">
-      <h1 class="text-3xl font-bold text-gray-900">Sales (POS)</h1>
+  <div class="px-0 py-4 sm:px-0 sm:py-6">
+    <div class="mb-4 sm:mb-6">
+      <h1 class="text-2xl sm:text-3xl font-bold text-gray-900">Sales (POS)</h1>
     </div>
 
-    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-4 sm:gap-6">
       <!-- Medicine Selection -->
       <div class="lg:col-span-2">
-        <div class="bg-white shadow rounded-lg p-6">
-          <h2 class="text-xl font-semibold mb-4">Select Medicine</h2>
+        <div class="bg-white shadow rounded-lg p-4 sm:p-6">
+          <h2 class="text-lg sm:text-xl font-semibold mb-4">Select Medicine</h2>
           <input
             v-model="medicineSearch"
             type="text"
@@ -38,7 +38,8 @@
                   <p class="text-sm text-gray-500">Stock: {{ medicine.quantity }} | Price: ₹{{ medicine.selling_price }}</p>
                 </div>
                 <button
-                  class="bg-blue-600 hover:bg-blue-700 text-white px-3 py-1 rounded text-sm"
+                  type="button"
+                  class="shrink-0 bg-blue-600 hover:bg-blue-700 text-white px-3 py-2 rounded-md text-sm touch-manipulation min-h-[40px] min-w-[3rem]"
                   @click.stop="addToCart(medicine)"
                 >
                   Add
@@ -51,8 +52,8 @@
 
       <!-- Cart -->
       <div class="lg:col-span-1">
-        <div class="bg-white shadow rounded-lg p-6">
-          <h2 class="text-xl font-semibold mb-4">Cart</h2>
+        <div class="bg-white shadow rounded-lg p-4 sm:p-6 lg:sticky lg:top-4 lg:self-start">
+          <h2 class="text-lg sm:text-xl font-semibold mb-4">Cart</h2>
 
           <div v-if="cart.length === 0" class="text-center py-8 text-gray-500">
             Cart is empty
@@ -111,9 +112,10 @@
                 <span>₹{{ totalAmount.toFixed(2) }}</span>
               </div>
               <button
+                type="button"
                 @click="processSale"
                 :disabled="processing"
-                class="w-full bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-md font-medium disabled:opacity-50"
+                class="w-full bg-green-600 hover:bg-green-700 text-white px-4 py-3 rounded-md text-base font-medium disabled:opacity-50 touch-manipulation min-h-[48px]"
               >
                 {{ processing ? 'Processing...' : 'Complete Sale' }}
               </button>

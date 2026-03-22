@@ -1,13 +1,13 @@
 <template>
-  <div class="px-4 py-6 sm:px-0">
-    <div class="mb-6 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
-      <h1 class="text-3xl font-bold text-gray-900">Invoices</h1>
-      <div class="flex flex-wrap items-center gap-2 w-full sm:w-auto">
+  <div class="px-0 py-4 sm:py-6">
+    <div class="mb-4 sm:mb-6 flex flex-col sm:flex-row justify-between items-stretch sm:items-center gap-3 sm:gap-4">
+      <h1 class="text-2xl sm:text-3xl font-bold text-gray-900 shrink-0">Invoices</h1>
+      <div class="flex flex-wrap items-stretch sm:items-center gap-2 w-full sm:w-auto min-w-0">
         <input
           v-model="searchQuery"
           type="text"
           placeholder="Search by Bill no., Customer Name, or Phone..."
-          class="px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm"
+          class="min-w-0 w-full sm:w-auto sm:min-w-[12rem] flex-1 px-3 sm:px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm"
           @input="filterInvoices"
         />
         <input
@@ -59,7 +59,7 @@
       No invoices found
     </div>
 
-    <div v-else class="space-y-6 max-h-[calc(100vh-250px)] overflow-y-auto">
+    <div v-else class="space-y-4 sm:space-y-6 max-h-[calc(100dvh-12rem)] sm:max-h-[calc(100vh-250px)] overflow-y-auto -mx-1 px-1 sm:mx-0 sm:px-0">
       <!-- Date-wise grouped invoices -->
       <div v-for="group in paginatedGroups" :key="group.date" class="bg-white shadow rounded-lg overflow-hidden">
         <!-- Date Header -->
@@ -107,7 +107,7 @@
                 </div>
                 
                 <!-- Action Buttons -->
-                <div class="flex-shrink-0 flex items-center gap-2">
+                <div class="flex-shrink-0 flex flex-wrap items-center gap-2">
                 <button
                   @click="viewInvoice(invoice)"
                   class="px-3 py-1.5 bg-blue-50 hover:bg-blue-100 text-blue-700 rounded-md text-sm font-medium transition-colors shadow-sm hover:shadow"

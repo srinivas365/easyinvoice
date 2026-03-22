@@ -1,10 +1,11 @@
 <template>
-  <div class="px-4 py-6 sm:px-0">
-    <div class="mb-6 flex justify-between items-center">
-      <h1 class="text-3xl font-bold text-gray-900">Purchase Invoices</h1>
+  <div class="px-0 py-4 sm:py-6">
+    <div class="mb-6 flex flex-col gap-3 sm:flex-row sm:justify-between sm:items-center">
+      <h1 class="text-2xl sm:text-3xl font-bold text-gray-900">Purchase Invoices</h1>
       <button
+        type="button"
         @click="openAddModal()"
-        class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md text-sm font-medium"
+        class="w-full sm:w-auto shrink-0 bg-blue-600 hover:bg-blue-700 text-white px-4 py-2.5 rounded-md text-sm font-medium touch-manipulation min-h-[44px] sm:min-h-0"
       >
         Add Purchase Invoice
       </button>
@@ -18,7 +19,8 @@
       No purchase invoices found. Create one by selecting a distributor and adding items.
     </div>
 
-    <div v-else class="bg-white shadow overflow-hidden sm:rounded-md">
+    <div v-else class="bg-white shadow overflow-hidden sm:rounded-md -mx-1 sm:mx-0">
+      <div class="overflow-x-auto">
       <table class="min-w-full divide-y divide-gray-200">
         <thead class="bg-gray-50">
           <tr>
@@ -50,16 +52,17 @@
           </tr>
         </tbody>
       </table>
+      </div>
     </div>
 
     <!-- Add / Edit Invoice Modal -->
     <div
       v-if="showFormModal"
-      class="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full z-50"
+      class="fixed inset-0 z-50 overflow-y-auto bg-gray-600/50 p-2 sm:p-4"
       @click.self="showFormModal = false"
     >
-      <div class="relative top-4 mx-auto p-8 border w-full max-w-7xl shadow-lg rounded-md bg-white mb-8">
-        <h3 class="text-lg font-bold mb-4">{{ editingId ? 'Edit' : 'Add' }} Purchase Invoice</h3>
+      <div class="relative mx-auto my-2 sm:my-4 w-full max-w-7xl rounded-lg border bg-white p-4 sm:p-8 shadow-lg mb-[max(1rem,env(safe-area-inset-bottom))] touch-manipulation">
+        <h3 class="text-base sm:text-lg font-bold mb-4">{{ editingId ? 'Edit' : 'Add' }} Purchase Invoice</h3>
 
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
           <div>

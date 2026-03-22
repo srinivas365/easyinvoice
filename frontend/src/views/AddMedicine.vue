@@ -1,10 +1,10 @@
 <template>
-  <div class="px-4 py-6 sm:px-0">
-    <div class="mb-6">
-      <h1 class="text-3xl font-bold text-gray-900">Add Medicine</h1>
+  <div class="px-0 py-4 sm:py-6">
+    <div class="mb-4 sm:mb-6">
+      <h1 class="text-2xl sm:text-3xl font-bold text-gray-900">Add Medicine</h1>
     </div>
 
-    <div class="bg-white shadow rounded-lg p-6 max-w-2xl">
+    <div class="bg-white shadow rounded-lg p-4 sm:p-6 w-full max-w-2xl">
       <form @submit.prevent="handleSubmit">
         <div class="grid grid-cols-1 gap-6 sm:grid-cols-2">
           <div>
