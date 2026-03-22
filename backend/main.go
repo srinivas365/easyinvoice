@@ -7,8 +7,6 @@ import (
 	"pharmacy-erp/config"
 	"pharmacy-erp/models"
 	"pharmacy-erp/routes"
-
-	"golang.org/x/crypto/bcrypt"
 )
 
 func main() {
@@ -17,9 +15,6 @@ func main() {
 
 	// Run migrations
 	migrate()
-
-	// Create default admin user if not exists
-	createDefaultAdmin()
 
 	// Setup routes
 	r := routes.SetupRoutes()
@@ -150,30 +145,4 @@ func migrate() {
 	}
 
 	log.Println("Migrations completed successfully")
-}
-
-func createDefaultAdmin() {
-	var count int64
-	config.DB.Model(&models.User{}).Count(&count)
-
-	if count == 0 {
-		hashedPassword, _ := bcrypt.GenerateFromPassword([]byte("admin123"), bcrypt.DefaultCost)
-		admin := models.User{
-			Username: "admin",
-			Password: string(hashedPassword),
-			Role:     "admin",
-		}
-		config.DB.Create(&admin)
-		log.Println("Default admin user created (username: admin, password: admin123)")
-
-		// Create a staff user as well
-		hashedPasswordStaff, _ := bcrypt.GenerateFromPassword([]byte("staff123"), bcrypt.DefaultCost)
-		staff := models.User{
-			Username: "staff",
-			Password: string(hashedPasswordStaff),
-			Role:     "staff",
-		}
-		config.DB.Create(&staff)
-		log.Println("Default staff user created (username: staff, password: staff123)")
-	}
 }

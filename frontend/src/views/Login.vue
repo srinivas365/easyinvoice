@@ -50,9 +50,6 @@
             {{ authStore.loading ? 'Signing in...' : 'Sign in' }}
           </button>
         </div>
-        <div class="text-sm text-gray-500 text-center">
-          <p>Default: admin/admin123 or staff/staff123</p>
-        </div>
       </form>
     </div>
   </div>
